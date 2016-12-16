@@ -11,6 +11,7 @@ public class GameOverManager : MonoBehaviour {
     float restartTimer;
 
     void Awake() {
+        ElementalSystem.Initialize();
         anim = GameObject.Find("PlayerUI").GetComponent<Animator>();
         playerHealth = FindObjectOfType(typeof(PlayerHealth)) as PlayerHealth;
     }

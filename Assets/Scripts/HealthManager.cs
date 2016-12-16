@@ -7,6 +7,7 @@ public  class HealthManager : MonoBehaviour
 	public int initHealth;
     private int defaultInitHealth = 100;
 	public int currentHealth;
+    public ElementalSystem.Element type;
     public ParticleSystem hitParticles; 
    //  float sinkSpeed = 2.5f;
 	public EventsManager eventsManager;
@@ -26,7 +27,7 @@ public  class HealthManager : MonoBehaviour
 
 	}
 
-    virtual public void TakeDamage(int damage, Vector3 hitPoint)
+    virtual public void TakeDamage(int damage, Vector3 hitPoint, DamageType.DamageStatus status)
     {
         if (IsDead())
             return;

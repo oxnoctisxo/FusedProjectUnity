@@ -2,18 +2,13 @@
 using System.Collections;
 
 public class SkillShooter : MonoBehaviour {
-    public GameObject prefab;
+    public Skill skill;
     public bool useInvokerObjectLayer;
     public bool useInvokerObjecTag;
     public string input;
-    public int speed;
-    public float spawnInterval = 0.15f;
-    public float range = 100f;
 
     float timer;
     HealthManager healthMan;
-    Ray shootRay;
-    RaycastHit shootHit;
     Animator anim;
     bool isAttacking;
 
@@ -22,6 +17,7 @@ public class SkillShooter : MonoBehaviour {
         anim = GetComponentInParent<Animator>();
         healthMan = GetComponentInParent<HealthManager>();
         isAttacking = false;
+        skill.Load();
     }
 
     void Update()
@@ -34,10 +30,10 @@ public class SkillShooter : MonoBehaviour {
         anim.SetBool("IsAttacking", isAttacking);
         if (input == "")
             input = "Fire1";
-        if (Input.GetButton(input) && timer >= spawnInterval && Time.timeScale != 0)
+        if (Input.GetButton(input) && timer >= skill.coolDown && Time.timeScale != 0)
         {
             isAttacking = true;
-            Shoot();
+            Cast();
         }
         else
         {
@@ -47,12 +43,12 @@ public class SkillShooter : MonoBehaviour {
 
     }
 
-    public virtual GameObject Shoot()
+    public virtual GameObject Cast()
     {
         timer = 0f;
-        //Jouer les sons .
-
-        GameObject instance = ObjectPoolsManager.GetInstance().GetObject(prefab);
+     
+            
+        GameObject instance = skill.prefab;
         instance.transform.position = transform.position;
         instance.layer = gameObject.layer;
 
@@ -69,20 +65,12 @@ public class SkillShooter : MonoBehaviour {
 
         if (!instance.GetComponent<DirectionalMovement>())
             instance.AddComponent<DirectionalMovement>();
-        if (!instance.GetComponent<PoolAfterXSeconds>())
-            instance.AddComponent<PoolAfterXSeconds>();
         DirectionalMovement directionalMove = instance.GetComponent<DirectionalMovement>();
-        PoolAfterXSeconds dieAfter = instance.GetComponent<PoolAfterXSeconds>();
+        directionalMove.direction = transform.forward;
+        directionalMove.speed = skill.speed;
+       
 
-
-        shootRay.origin = transform.position;
-        shootRay.direction = transform.forward;
-
-        directionalMove.direction = shootRay.direction;
-        directionalMove.speed = speed;
-
-        dieAfter.delay = range / (directionalMove.speed * 5);
-        return instance;
+        return skill.Cast();
 
     }
 }

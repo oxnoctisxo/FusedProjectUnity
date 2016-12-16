@@ -53,7 +53,7 @@ public class EnemyAttack : MonoBehaviour {
         timer = 0f;
         if (playerHealth.currentHealth > 0)
         {
-            playerHealth.TakeDamage(attackDamage, playerHealth.transform.position);
+            playerHealth.TakeDamage(attackDamage, playerHealth.transform.position, DamageType.DamageStatus.Normal);
         }
     }
 }

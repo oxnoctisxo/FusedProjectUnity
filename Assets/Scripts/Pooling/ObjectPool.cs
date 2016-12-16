@@ -18,7 +18,7 @@ public class ObjectPool  {
 		if (pool.Count == 0) {
             obj = Object.Instantiate(prefab);
 			obj.name = prefab.name;
-            obj.transform.parent = parentFolder.transform;
+            obj.transform.SetParent(parentFolder.transform);
 			obj.SetActive (true);
 			return obj;
 		}

@@ -15,7 +15,7 @@ public class DieAfter : MonoBehaviour
         if (timeLeft <= 0)
         {
             HealthManager healthMan = GetComponent<HealthManager>();
-            healthMan.TakeDamage(healthMan.initHealth,transform.position);
+            healthMan.TakeDamage(healthMan.initHealth, transform.position, DamageType.DamageStatus.Normal);
         }
 
 

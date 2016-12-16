@@ -23,7 +23,7 @@ public class WaveManager : MonoBehaviour {
     public Text waveText;
 
     // Liste des lieux de Spawn
-    private SpawningPoint[] spawningPoints ;
+    private EnemySpawn[] spawningPoints;
     private int spawningPointsIterator;
 	// Description d'une vague et de chaque element y faisant partie.
 	[System.Serializable]
@@ -64,7 +64,7 @@ public class WaveManager : MonoBehaviour {
 		// Coroutine pour démarrer les vagues
 		StartCoroutine(NextWave());
 
-        spawningPoints = FindObjectsOfType(typeof(SpawningPoint)) as SpawningPoint[];
+        spawningPoints = FindObjectsOfType(typeof(EnemySpawn)) as EnemySpawn[];
         spawningPointsIterator = 0;
         playerHealth = FindObjectOfType(typeof(PlayerHealth)) as PlayerHealth ;
    
@@ -167,7 +167,7 @@ public class WaveManager : MonoBehaviour {
             spawningPointsIterator++;
             if (spawningPointsIterator == spawningPoints.Length)
             {
-                spawningPoints = FindObjectsOfType(typeof(SpawningPoint)) as SpawningPoint[];
+                spawningPoints = FindObjectsOfType(typeof(EnemySpawn)) as EnemySpawn[];
                 return;
             }
         }

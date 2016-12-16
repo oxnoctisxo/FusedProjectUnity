@@ -6,6 +6,7 @@ public class Healthbar : MonoBehaviour {
 
 	void Update() {
 		if (enemy == null) {
+            gameObject.SetActive(false);
 			return;
 		}
 
