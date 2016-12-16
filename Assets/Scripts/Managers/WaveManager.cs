@@ -4,9 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class WaveManager : MonoBehaviour {
-
-	// La santé du jeu
-	public PlayerHealth playerHealth;   
+    [Header("Basic infos")]
+    // La santé du jeu
+    public PlayerHealth playerHealth;   
 	// Zone buffer pour éviter que les ennemies spawnent dans le champ de la caméra
 	public float bufferDistance = 200;
 	// Temps entre chaque vague
@@ -18,8 +18,9 @@ public class WaveManager : MonoBehaviour {
 	// Difficulté par défaut
 	public int startingDifficulty = 1;
 	// Nombre d'ennemies vivants dans la vague
-	[HideInInspector]
+	//[HideInInspector]
 	public int enemiesAlive = 0;
+    [Header("Wave management")]
     public Text waveText;
 
     // Liste des lieux de Spawn
@@ -189,6 +190,7 @@ public class WaveManager : MonoBehaviour {
     //Diminiue le nombre d'énnemies en vie connus 
     public void DecrementEnemiesAlive()
     {
+        Debug.Log("done");
         enemiesAlive--;
     } 
 }

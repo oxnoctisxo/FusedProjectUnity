@@ -3,7 +3,6 @@ using System.Collections;
 
 public class ShakeOnCrit : CamShake
 {
-  
 
     void Awake()
     {

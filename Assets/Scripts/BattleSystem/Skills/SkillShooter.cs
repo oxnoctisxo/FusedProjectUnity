@@ -23,6 +23,7 @@ public class SkillShooter : MonoBehaviour {
 
     void Update()
     {
+        skill.Load();
         timer += Time.deltaTime;
         //Ne fait rien si mort .
         if (healthMan.IsDead())

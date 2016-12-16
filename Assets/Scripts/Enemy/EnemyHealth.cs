@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class EnemyHealth : HealthManager
 {
 
+    [Header("Enemy Relatd infos")]
     public Slider healthBarSlider;
     public GameObject damageText;
     GameObject enemyHealthbarManager;

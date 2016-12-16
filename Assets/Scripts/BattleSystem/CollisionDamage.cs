@@ -3,21 +3,36 @@ using System.Collections;
 
 public class CollisionDamage : MonoBehaviour {
 
-   
-	public int damage;
+    [Header("Basic infos")]
+    public int damage;
     [Range(0, 100)]
     public int criticalRate;
     public ElementalSystem.Element type;
-
     DamageType.DamageStatus status = DamageType.DamageStatus.Normal;
-	void OnTriggerEnter(Collider col) {
-         if (gameObject.layer == col.gameObject.layer)
+
+    [Header("Perforation related infos")]
+    public bool isPerforing ;
+    private HealthManager previous;
+    private HealthManager current;
+
+    void OnTriggerEnter(Collider col) {
+        //Verifie si la collision est possible
+       if (gameObject.layer == col.gameObject.layer)
             return;
        if (col.gameObject.layer == LayerMask.NameToLayer("Invincible"))
-                return;
-        
-		HealthManager healthMan = col.gameObject.GetComponentInParent<HealthManager> ();
+             return;
+        HealthManager healthMan = col.gameObject.GetComponentInParent<HealthManager>();      
 		if (healthMan) {
+            if (!previous)
+                previous = healthMan;
+            else
+            {
+                current = healthMan;
+                if (previous == current)
+                {
+                    return;
+                }
+            }
             //Calcule l'efficité 
             ElementalSystem.Element typeDestination = healthMan.type;
             int finalDamage = (int) Mathf.Round(damage * ElementalSystem.GetDamageRatio(type, typeDestination));
@@ -34,6 +49,8 @@ public class CollisionDamage : MonoBehaviour {
                 status = DamageType.DamageStatus.Critical;
             }
             healthMan.TakeDamage( finalDamage , transform.position,status);
+
+            previous = healthMan;
 		}
 	}
 
@@ -46,5 +63,5 @@ public static class DamageType : object
         Effective = 0, Innefective = 1, Normal = 2, Critical = 3
 
     };
-    public static Color[] damageColors = { Color.green, Color.black, Color.white, Color.yellow };
+    public static Color[] damageColors = { Color.blue, Color.black, Color.white, Color.yellow };
 }

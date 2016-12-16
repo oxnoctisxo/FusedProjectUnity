@@ -3,13 +3,12 @@ using System.Collections;
 
 public  class HealthManager : MonoBehaviour
 {
- 
-	public int initHealth;
+    [Header("Basic health attributes")]
+    public int initHealth;
     private int defaultInitHealth = 100;
 	public int currentHealth;
     public ElementalSystem.Element type;
     public ParticleSystem hitParticles; 
-   //  float sinkSpeed = 2.5f;
 	public EventsManager eventsManager;
 
          

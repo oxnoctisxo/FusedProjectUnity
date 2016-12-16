@@ -32,7 +32,14 @@ public class FloatingText : MonoBehaviour {
     {
         if (!outline)
             outline = animator.GetComponent<Outline>();
-        outline.effectColor = color;
+        if (!damageText)
+            damageText = animator.GetComponent<Text>();
+        damageText.color = color;
+        if(!color.Equals(Color.white))
+            outline.effectColor = Color.white;
+        else
+            outline.effectColor = Color.black;
+
     }
     void Update()
     {
