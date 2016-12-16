@@ -44,6 +44,7 @@ public class Skill : ScriptableObject {
    
         collisionDamage.damage = damage;
         collisionDamage.type = element;
+        collisionDamage.criticalRate = criticalRate;
 
 	}
     public virtual GameObject Cast()
@@ -60,7 +61,7 @@ public class Skill : ScriptableObject {
             instance.AddComponent<DirectionalMovement>();
         DirectionalMovement directionalMove = instance.GetComponent<DirectionalMovement>();
         directionalMove.direction = prefab.GetComponent<DirectionalMovement>().direction;
-        directionalMove.speed = speed;
+        directionalMove.speed = speed;  
         return instance;
 
     }

@@ -9,14 +9,15 @@ public class SkillShooter : MonoBehaviour {
 
     float timer;
     HealthManager healthMan;
-    Animator anim;
-    bool isAttacking;
+    public Animator anim;
+    bool isAttacking =false;
 
     void Awake()
     {
-        anim = GetComponentInParent<Animator>();
+       
+       //  anim = GetComponentInChildren<Animator>();
         healthMan = GetComponentInParent<HealthManager>();
-        isAttacking = false;
+       
         skill.Load();
     }
 
@@ -37,7 +38,7 @@ public class SkillShooter : MonoBehaviour {
         }
         else
         {
-            if( timer >= 1f)
+            if( timer >= 0.2f)
             isAttacking = false;
         }
 
