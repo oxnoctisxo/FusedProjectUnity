@@ -70,8 +70,8 @@ public class SkillShooter : MonoBehaviour {
         DirectionalMovement directionalMove = instance.GetComponent<DirectionalMovement>();
         directionalMove.direction = transform.forward;
         directionalMove.speed = skill.speed;
-       
 
+        //instance.transform.position = Vector3.MoveTowards(instance.transform.position, instance.transform.forward + new Vector3(0, 0, skill.range), Time.deltaTime * skill.speed);
         return skill.Cast();
 
     }

@@ -43,14 +43,20 @@ public class Skill : ScriptableObject {
         healthman.usesTTL = usesTTL;
         healthman.timeToLive = timeToLive;
 
-        if (usesTTL)
+       
+       dieAfter = prefab.GetComponent<PoolAfterXSeconds>();
+        //Initialise sa durée de vie 
+
+       if (!dieAfter)
+          dieAfter = prefab.AddComponent<PoolAfterXSeconds>();
+       if (usesTTL)
         {
-            dieAfter = prefab.GetComponent<PoolAfterXSeconds>();
-            //Initialise sa durée de vie 
-            if (!dieAfter)
-                dieAfter = prefab.AddComponent<PoolAfterXSeconds>();
-            dieAfter.delay = range / (speed * 5);
+            dieAfter.delay = timeToLive;
         }
+       else
+       {
+           dieAfter.delay = range / (speed * 1.5f);
+       }
 
         //Initialise les dégats 
         collisionDamage = prefab.GetComponent<CollisionDamage>();

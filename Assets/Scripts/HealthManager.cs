@@ -57,7 +57,7 @@ public  class HealthManager : MonoBehaviour
         return currentHealth <= 0;
     }
 
-    virtual protected void Die()
+    virtual public void Die()
     {
 		eventsManager.Die ();
 	}

@@ -21,8 +21,15 @@ public class CollisionDamage : MonoBehaviour {
             return;
        if (col.gameObject.layer == LayerMask.NameToLayer("Invincible"))
              return;
-        HealthManager healthMan = col.gameObject.GetComponentInParent<HealthManager>();      
+       if (col.gameObject.layer == LayerMask.NameToLayer("Terrain") && gameObject.tag.Equals("Projectile"))
+       {
+           HealthManager myHealthMan = gameObject.GetComponentInParent<HealthManager>(); 
+           myHealthMan.Die();
+           return;
+       }
+       HealthManager healthMan = col.gameObject.GetComponentInParent<HealthManager>();    
 		if (healthMan) {
+            
             if (!previous)
                 previous = healthMan;
             else
@@ -63,5 +70,5 @@ public static class DamageType : object
         Effective = 0, Innefective = 1, Normal = 2, Critical = 3
 
     };
-    public static Color[] damageColors = { Color.blue, Color.black, Color.white, Color.yellow };
+    public static Color[] damageColors = { Color.red + Color.yellow, Color.gray, Color.white, Color.yellow};
 }

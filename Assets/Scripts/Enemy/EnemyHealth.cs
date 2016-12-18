@@ -78,7 +78,7 @@ public class EnemyHealth : HealthManager
         }
 	}
 
-    override protected void Die()
+    override public void Die()
     {
         ObjectPoolsManager.GetInstance().PoolObject(sliderInstance.gameObject);
         base.Die();
