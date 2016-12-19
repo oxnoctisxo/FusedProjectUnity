@@ -53,7 +53,10 @@ public class CollisionDamage : MonoBehaviour {
             if (Random.Range(0, 101) <= criticalRate)
             {
                 finalDamage *= 2;
-                status = DamageType.DamageStatus.Critical;
+                if (status == DamageType.DamageStatus.Effective)
+                    status = DamageType.DamageStatus.EffectiveAndCritical;
+                else 
+                    status = DamageType.DamageStatus.Critical;
             }
             healthMan.TakeDamage( finalDamage , transform.position,status);
 
@@ -67,8 +70,8 @@ public static class DamageType : object
     public enum DamageStatus : int
     {
         //Chaque statu corespond à l'adresse d'une couleur 
-        Effective = 0, Innefective = 1, Normal = 2, Critical = 3
+        Effective = 0, Innefective = 1, Normal = 2, Critical = 3, EffectiveAndCritical = 4
 
     };
-    public static Color[] damageColors = { Color.red + Color.yellow, Color.gray, Color.white, Color.yellow};
+    public static Color[] damageColors = { Color.blue, Color.gray, Color.white, new Color(255, 215, 0) /* gold */  , new Color(255, 140, 0) /* Dark orange */};
 }

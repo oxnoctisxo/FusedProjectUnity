@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SkillShooter : MonoBehaviour {
-    public Skill skill;
+    public Skill selectedSkill;
+    public List<Skill> avaibleSkills;
+
     public bool useInvokerObjectLayer;
     public bool useInvokerObjecTag;
     public string input;
@@ -12,18 +15,36 @@ public class SkillShooter : MonoBehaviour {
     public Animator anim;
     bool isAttacking =false;
 
+
+    Dictionary<KeyCode, Skill> avaibleSkillsDictionary = new Dictionary<KeyCode, Skill>();
     void Awake()
     {
        
        //  anim = GetComponentInChildren<Animator>();
         healthMan = GetComponentInParent<HealthManager>();
-       
-        skill.Load();
+        selectedSkill.Load();
+        foreach (Skill s in avaibleSkills)
+        {
+            avaibleSkillsDictionary.Add(s.activationButton, s);
+        }
+
     }
 
     void Update()
     {
-        skill.Load();
+
+        foreach (KeyCode key in avaibleSkillsDictionary.Keys)
+        {
+            if (Input.GetKeyDown(key))
+            {
+                selectedSkill = avaibleSkillsDictionary[key];
+                selectedSkill.Load();
+                timer = 0f;
+                return;
+
+            }
+        }
+       
         timer += Time.deltaTime;
         //Ne fait rien si mort .
         if (healthMan.IsDead())
@@ -32,7 +53,7 @@ public class SkillShooter : MonoBehaviour {
         anim.SetBool("IsAttacking", isAttacking);
         if (input == "")
             input = "Fire1";
-        if (Input.GetButton(input) && timer >= skill.coolDown && Time.timeScale != 0)
+        if (Input.GetButton(input) && timer >= selectedSkill.coolDown && Time.timeScale != 0)
         {
             isAttacking = true;
             Cast();
@@ -50,7 +71,7 @@ public class SkillShooter : MonoBehaviour {
         timer = 0f;
      
             
-        GameObject instance = skill.prefab;
+        GameObject instance = selectedSkill.prefab;
         instance.transform.position = transform.position;
         instance.layer = gameObject.layer;
 
@@ -69,10 +90,10 @@ public class SkillShooter : MonoBehaviour {
             instance.AddComponent<DirectionalMovement>();
         DirectionalMovement directionalMove = instance.GetComponent<DirectionalMovement>();
         directionalMove.direction = transform.forward;
-        directionalMove.speed = skill.speed;
+        directionalMove.speed = selectedSkill.speed;
 
         //instance.transform.position = Vector3.MoveTowards(instance.transform.position, instance.transform.forward + new Vector3(0, 0, skill.range), Time.deltaTime * skill.speed);
-        return skill.Cast();
+        return selectedSkill.Cast();
 
     }
 }

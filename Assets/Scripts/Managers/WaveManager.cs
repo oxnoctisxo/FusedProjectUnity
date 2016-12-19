@@ -18,14 +18,16 @@ public class WaveManager : MonoBehaviour {
 	// Difficulté par défaut
 	public int startingDifficulty = 1;
 	// Nombre d'ennemies vivants dans la vague
-	//[HideInInspector]
+	[HideInInspector]
 	public int enemiesAlive = 0;
+   
     [Header("Wave management")]
     public Text waveText;
 
     // Liste des lieux de Spawn
     private EnemySpawn[] spawningPoints;
     private int spawningPointsIterator;
+
 	// Description d'une vague et de chaque element y faisant partie.
 	[System.Serializable]
 	public class Wave {
@@ -190,7 +192,6 @@ public class WaveManager : MonoBehaviour {
     //Diminiue le nombre d'énnemies en vie connus 
     public void DecrementEnemiesAlive()
     {
-        Debug.Log("done");
         enemiesAlive--;
     } 
 }

@@ -6,8 +6,11 @@ public class ThunderBlotGenerator : MonoBehaviour {
     private Vector3 startingPoint;
     public float updateFrenquecy;
     public int elements;
+    public int recoilCount;
+    //[HideInInspector]
+    public int recoilCountLeft;
     public GameObject endingPoint;
-   
+    public Skill skill;
     LineRenderer line;
     float timer;
 
@@ -20,6 +23,7 @@ public class ThunderBlotGenerator : MonoBehaviour {
 
         if (elements == 0)
             elements = 10;
+        recoilCountLeft = recoilCount;
 	}
 	
 	// Update is called once per frame
@@ -36,7 +40,7 @@ public class ThunderBlotGenerator : MonoBehaviour {
         float oldEndX = startingPoint.x;
         for (int i = 1; i < elements-1; i++)
         {
-            positions[i] = new Vector3(/*Random.Range(-1f, 2)*/ Random.Range(oldEndX + 0.2f, endingPoinyPos.x / (elements) * i), 0f, Random.Range(oldEnd + 0.2f, endingPoinyPos.z / (elements) * i));
+            positions[i] = new Vector3(/*Random.Range(-1f, 2)*/ Random.Range(oldEndX + 0.2f, endingPoinyPos.x / (elements) * i) , 0f, Random.Range(oldEnd + 0.2f, endingPoinyPos.z / (elements) * i));
             //positions[i] = (positions[i - 1] + positions[i + 1]).normalized;
             oldEnd = positions[i].z;
             oldEndX = positions[i].x;

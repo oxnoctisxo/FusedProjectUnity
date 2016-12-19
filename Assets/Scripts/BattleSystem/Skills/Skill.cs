@@ -15,12 +15,13 @@ public class Skill : ScriptableObject {
     public int speed;
     public float range;
     public float coolDown;
-    public string activationButton;
+    public KeyCode activationButton;
+
     public GameObject prefab;
  
     [Header("Aditional VFXs")]
     public ParticleSystem hitParticles;
-    public AudioClip son;
+    public AudioClip castingSound;
 
     [Header("Duration-time components")]
     public bool usesTTL;
@@ -71,7 +72,7 @@ public class Skill : ScriptableObject {
     public virtual GameObject Cast()
     {
         //Jouer les sons .
-        if (son)
+        if (castingSound)
         {
             
         }
@@ -80,10 +81,15 @@ public class Skill : ScriptableObject {
         instance.transform.rotation = Quaternion.identity;
         if (!instance.GetComponent<DirectionalMovement>())
             instance.AddComponent<DirectionalMovement>();
+       
+
+
         DirectionalMovement directionalMove = instance.GetComponent<DirectionalMovement>();
         directionalMove.direction = prefab.GetComponent<DirectionalMovement>().direction;
         directionalMove.speed = speed;  
         return instance;
 
     }
+
+  
 }

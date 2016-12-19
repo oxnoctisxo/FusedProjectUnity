@@ -6,15 +6,11 @@ public class DirectionalMovement : MonoBehaviour {
 	public int speed;
 	public Vector3 direction;
 
-    bool specialDirectionalMovement;
+    
     ThunderBlotGenerator tBG;
     void Start()
     {
         tBG = GetComponent<ThunderBlotGenerator>();
-        if (tBG)
-        {
-            specialDirectionalMovement = true;
-        }
     }
 	
 	// Update is called once per frame

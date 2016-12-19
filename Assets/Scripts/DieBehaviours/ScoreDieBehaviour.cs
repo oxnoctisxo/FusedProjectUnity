@@ -18,8 +18,8 @@ public class ScoreDieBehaviour : AbstractAsyncDieBehaviour {
 	public override void Die (GameObject deadObject)
 	{
         scoreManager.AddScore(score);
-        Debug.Log("trying");
-        waveManager.DecrementEnemiesAlive();
+        if(score > 0)
+            waveManager.DecrementEnemiesAlive();
         isFinished = true;
        
     }
