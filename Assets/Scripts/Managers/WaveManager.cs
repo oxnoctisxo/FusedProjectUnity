@@ -81,7 +81,7 @@ public class WaveManager : MonoBehaviour {
 		}
 
 		// Démarre la prochaine vague quand tout les ennemies de la vague sont morts
-		if (spawnedThisWave == totalToSpawnForWave && enemiesAlive == 0) {
+		if (spawnedThisWave == totalToSpawnForWave && (enemiesAlive == 0 ||  FindObjectsOfType<EnemyHealth>().Length == 0) ) {
 			StartCoroutine(NextWave());
 			return;
 		}
